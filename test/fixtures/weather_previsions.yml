@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2021-09-18
+  city: one
+  weather_type: one
+  temperature: 1
+  temperature_feels_like: 1
+  wind_direction: one
+  wind_speed: 1
+
+two:
+  date: 2021-09-18
+  city: two
+  weather_type: two
+  temperature: 1
+  temperature_feels_like: 1
+  wind_direction: two
+  wind_speed: 1
