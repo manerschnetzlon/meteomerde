@@ -10,9 +10,6 @@ const searchCity = () => {
       .then(response => response.json())
       .then((data) => {
         const cities = data.features;
-        // .forEach((city) => {
-        //   cities.push(city.properties.label);
-        // });
         ulElement.innerHTML = "";
         if (cities) {
           cities.forEach(city => {

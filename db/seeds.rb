@@ -5,6 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+WindDirection.destroy_all
+WeatherType.destroy_all
+City.destroy_all
 
 WindDirection.create!(name: 'Nord')
 WindDirection.create!(name: 'Nord Est')
@@ -45,3 +48,8 @@ WeatherType.create!(name: 'Tempête de sable')
 WeatherType.create!(name: 'Brise légère')
 WeatherType.create!(name: 'Vent')
 WeatherType.create!(name: 'Vents violents')
+
+City.create(name: 'Paris', longitude: 2.347, latitude: 48.859, country: 'France', region: 'Île-de-France', department: 'Paris')
+City.create(name: 'Toulouse', longitude: 1.434497, latitude: 43.603746, country: 'France', region: 'Occitanie', department: 'Haute-Garonne')
+City.create(name: 'Marseille', longitude: 5.405, latitude: 43.282, country: 'France', region: "Provence-Alpes-Côte d'Azur", department: 'Bouches-du-Rhône')
+City.create(name: 'Gruissan', longitude: 3.102981, latitude: 43.115546, country: 'France', region: 'Occitanie', department: 'Aude')
