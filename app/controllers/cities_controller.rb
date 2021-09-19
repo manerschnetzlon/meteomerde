@@ -6,8 +6,8 @@ class CitiesController < ApplicationController
   def show
     @city = City.find(params[:id])
     @weather_prevision_d1 = weather_prevision_d1
-    @weather_prevision_d2 = weather_prevision_d1
-    @weather_prevision_d3 = weather_prevision_d1
+    @weather_prevision_d2 = weather_prevision_d2
+    @weather_prevision_d3 = weather_prevision_d3
   end
 
   def create
