@@ -11,7 +11,7 @@ class CitiesController < ApplicationController
   end
 
   def create
-    @city = City.new(name: params['name'], longitude: params['longitude'], latitude: params['latitude'], department: params['department'], region: params['region'], country: params['country'])
+    @city = City.new(city_params)
     @city.save
     redirect_to city_path(@city)
   end
@@ -19,7 +19,7 @@ class CitiesController < ApplicationController
   private
 
   def city_params
-    params.require(:city).permit(:name, :longitude, :latitude, :country, :region, :department)
+    params.permit(:name, :longitude, :latitude, :country, :region, :department)
   end
 
   def weather_prevision_d1
