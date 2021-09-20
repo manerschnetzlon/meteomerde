@@ -1,15 +1,15 @@
 <h1>Welcome to meteomerde.com</h1>
 
-<%# <div class="search-city d-flex align-items-baseline">
-  <p>Search a city: </p>
-  <input type="text" id="search">
-  <ul id="results"></ul>
-</div> %>
-
 <div class="cities">
   <ul>
     <% @cities.each do |city| %>
       <li><%= link_to city.name, city_path(city) %></li>
     <% end %>
   </ul>
+</div>
+
+<div class="search-city d-flex align-items-baseline">
+  <p>Search a city: </p>
+  <input type="text" id="search">
+  <ul id="results"></ul>
 </div>

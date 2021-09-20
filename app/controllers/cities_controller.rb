@@ -11,8 +11,9 @@ class CitiesController < ApplicationController
   end
 
   def create
-    @city = City.new(name: params['name'])
+    @city = City.new(name: params['name'], longitude: params['longitude'], latitude: params['latitude'], department: params['department'], region: params['region'], country: params['country'])
     @city.save
+    redirect_to city_path(@city)
   end
 
   private
