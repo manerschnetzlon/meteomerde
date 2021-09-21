@@ -12,8 +12,11 @@ class CitiesController < ApplicationController
 
   def create
     @city = City.new(city_params)
-    @city.save
-    redirect_to city_path(@city)
+    if @city.save
+      redirect_to city_path(@city)
+    else
+      redirect_to cities_path
+    end
   end
 
   private
@@ -48,12 +51,21 @@ class CitiesController < ApplicationController
 
   def random_weather_prevision(day)
     city = City.find(params[:id])
-    weather_type = WeatherType.order('RANDOM()').first
+    weathers_array = []
+    WeatherType.all.each { |weather| weather.weight.times { weathers_array << weather } }
+    weather_type = weathers_array.sample
+    # weather_type = WeatherType.order('RANDOM()').first
     wind_direction = WindDirection.order('RANDOM()').first
-    temperature = (-15..45).to_a.sample
-    temperature_feels_like = (-15..45).to_a.sample
-    wind_speed = (0..120).to_a.sample
+    # raise
+    temperature = if WeatherPrevision.exists?(city_id: city.id)
+                    WeatherPrevision.find_by(city: city, date: day - 1).temperature
+                  else
+                    (12..25).to_a.sample
+                  end
+    temperature += weather_type.temp
+    # temperature_feels_like = (10..25).to_a.sample
+    # wind_speed = (0..60).to_a.sample
 
-    WeatherPrevision.create(date: day, city: city, weather_type: weather_type, temperature: temperature, temperature_feels_like: temperature_feels_like, wind_direction: wind_direction, wind_speed: wind_speed)
+    WeatherPrevision.create!(date: day, city: city, weather_type: weather_type, temperature: temperature, wind_direction: wind_direction)
   end
 end
