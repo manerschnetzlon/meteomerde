@@ -55,9 +55,8 @@ class CitiesController < ApplicationController
     WeatherType.all.each { |weather| weather.weight.times { weathers_array << weather } }
     weather_type = weathers_array.sample
     # weather_type = WeatherType.order('RANDOM()').first
-    wind_direction = WindDirection.order('RANDOM()').first
     # raise
-    temperature = if WeatherPrevision.exists?(city_id: city.id)
+    temperature = if WeatherPrevision.exists?(city_id: city.id, date: day - 1)
                     WeatherPrevision.find_by(city: city, date: day - 1).temperature
                   else
                     (12..25).to_a.sample
@@ -66,6 +65,6 @@ class CitiesController < ApplicationController
     # temperature_feels_like = (10..25).to_a.sample
     # wind_speed = (0..60).to_a.sample
 
-    WeatherPrevision.create!(date: day, city: city, weather_type: weather_type, temperature: temperature, wind_direction: wind_direction)
+    WeatherPrevision.create!(date: day, city: city, weather_type: weather_type, temperature: temperature)
   end
 end

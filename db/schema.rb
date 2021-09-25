@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_21_202915) do
+ActiveRecord::Schema.define(version: 2021_09_25_195355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,9 +21,28 @@ ActiveRecord::Schema.define(version: 2021_09_21_202915) do
     t.float "latitude"
     t.string "country"
     t.string "region"
-    t.string "department"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "department_id"
+    t.index ["department_id"], name: "index_cities_on_department_id"
+  end
+
+  create_table "departments", force: :cascade do |t|
+    t.string "name"
+    t.integer "number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "temperature_records", force: :cascade do |t|
+    t.integer "month"
+    t.integer "temp_min"
+    t.integer "temp_max"
+    t.integer "temp_average"
+    t.bigint "department_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["department_id"], name: "index_temperature_records_on_department_id"
   end
 
   create_table "weather_previsions", force: :cascade do |t|
@@ -31,14 +50,10 @@ ActiveRecord::Schema.define(version: 2021_09_21_202915) do
     t.bigint "city_id", null: false
     t.bigint "weather_type_id", null: false
     t.integer "temperature"
-    t.integer "temperature_feels_like"
-    t.bigint "wind_direction_id", null: false
-    t.integer "wind_speed"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["city_id"], name: "index_weather_previsions_on_city_id"
     t.index ["weather_type_id"], name: "index_weather_previsions_on_weather_type_id"
-    t.index ["wind_direction_id"], name: "index_weather_previsions_on_wind_direction_id"
   end
 
   create_table "weather_types", force: :cascade do |t|
@@ -46,16 +61,12 @@ ActiveRecord::Schema.define(version: 2021_09_21_202915) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "weight"
-    t.integer "temp", default: 0
+    t.integer "temperature_max"
+    t.integer "temperature_min"
   end
 
-  create_table "wind_directions", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
+  add_foreign_key "cities", "departments"
+  add_foreign_key "temperature_records", "departments"
   add_foreign_key "weather_previsions", "cities"
   add_foreign_key "weather_previsions", "weather_types"
-  add_foreign_key "weather_previsions", "wind_directions"
 end
