@@ -11,16 +11,11 @@ class CitiesController < ApplicationController
   end
 
   def create
-    department = find_department(city_params[:department])
+    city_attributes = city_attributes(city_params)
 
-    city_attributes = { name: city_params[:name],
-                        longitude: city_params[:longitude],
-                        latitude: city_params[:latitude],
-                        country: city_params[:country],
-                        region: city_params[:region],
-                        department: department }
-
-    if City.exists?(city_attributes)
+    if city_attributes[:department].nil?
+      redirect_to cities_path, notice: "Désolé, impossible d'afficher les prévisions météo pour #{city_attributes[:name]}, meteomerde ne couvre actuellement que la France métropolitaine :'("
+    elsif City.exists?(city_attributes)
       redirect_to city_path(City.find_by(city_attributes))
     else
       @city = City.new(city_attributes)
@@ -32,6 +27,15 @@ class CitiesController < ApplicationController
 
   def city_params
     params.permit(:name, :longitude, :latitude, :country, :region, :department)
+  end
+
+  def city_attributes(city_params)
+    { name: city_params[:name],
+      longitude: city_params[:longitude],
+      latitude: city_params[:latitude],
+      country: city_params[:country],
+      region: city_params[:region],
+      department: find_department(city_params[:department]) }
   end
 
   def find_department(params_department)
@@ -65,9 +69,9 @@ class CitiesController < ApplicationController
                     ((record.temp_min)..(record.temp_max)).to_a.sample
                   end
 
-    weathers_temp_min = WeatherType.where('temperature_min <= ?', temperature).or(WeatherType.where(temperature_min: nil))
-    weathers_temp_max = WeatherType.where('temperature_max >= ?', temperature).or(WeatherType.where(temperature_max: nil))
-    possible_weathers = weathers_temp_min & weathers_temp_max
+    weathers_min = WeatherType.where('temperature_min <= ?', temperature).or(WeatherType.where(temperature_min: nil))
+    weathers_max = WeatherType.where('temperature_max >= ?', temperature).or(WeatherType.where(temperature_max: nil))
+    possible_weathers = weathers_min & weathers_max
     weathers_array = []
     possible_weathers.each { |weather| weather.weight.times { weathers_array << weather.id } }
     weather_type = WeatherType.find(weathers_array.sample)
