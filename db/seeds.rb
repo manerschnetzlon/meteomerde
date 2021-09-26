@@ -8,6 +8,9 @@
 City.destroy_all
 WeatherPrevision.destroy_all
 WeatherType.destroy_all
+WeatherType.destroy_all
+Department.destroy_all
+TemperatureRecord.destroy_all
 
 WeatherType.create!(name: 'Très ensoleillé', weight: 10)
 WeatherType.create!(name: 'Ensoleillé', weight: 15)
@@ -39,13 +42,17 @@ WeatherType.create!(name: 'Cyclone', weight: 1, temperature_min: 29)
 WeatherType.create!(name: 'Ouragan', weight: 1, temperature_min: 29)
 WeatherType.create!(name: 'Tempête de sable', weight: 1, temperature_min: 30)
 
+require 'csv'
 csv_options = { headers: :first_row, header_converters: :symbol }
 
 month = '01'
 month_record = {
   temp_min: [],
-  temp_max: []
+  temp_max: [],
+  temp_average: []
 }
+
+puts 'Start reading the CSV file'
 
 CSV.foreach('db/temperature_records.csv', csv_options) do |row|
   month_record[:num] = row[:num].to_i
@@ -57,15 +64,20 @@ CSV.foreach('db/temperature_records.csv', csv_options) do |row|
     month_record[:temp_max] << row[:max].to_f.round
     month_record[:temp_average] << row[:average].to_f.round
   else
-    unless Department.exists?(num: month_record[:num])
-      Department.create!(name: month_record[:name], num: month_record[:num])
+    unless Department.exists?(number: month_record[:num])
+      Department.create!(name: month_record[:name], number: month_record[:num])
+      puts "#{month_record[:name]} departement created !"
     end
     temp_min = month_record[:temp_min].sum / month_record[:temp_min].length
     temp_max = month_record[:temp_max].sum / month_record[:temp_max].length
     temp_average = month_record[:temp_average].sum / month_record[:temp_average].length
-    department = Department.find_by(num: month_record[:num])
-    TemperatureRecord.create!(month: month_record[:month], temp_min: temp_min, temp_max: temp_max, temp_average: temp_average, department: department)
-
+    department = Department.find_by(number: month_record[:num])
+    unless TemperatureRecord.exists?(month: month_record[:month], department: department)
+      TemperatureRecord.create!(month: month_record[:month], temp_min: temp_min, temp_max: temp_max, temp_average: temp_average, department: department)
+      puts "Temperature record for #{department.name} and month #{month_record[:month]} created !"
+    end
     month = month <= '12' ? month.next : '01'
   end
 end
+
+puts 'CSV file loaded !'

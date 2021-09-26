@@ -58,11 +58,11 @@ ActiveRecord::Schema.define(version: 2021_09_25_195355) do
 
   create_table "weather_types", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.integer "weight"
     t.integer "temperature_max"
     t.integer "temperature_min"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "cities", "departments"
