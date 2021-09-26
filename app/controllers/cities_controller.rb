@@ -5,17 +5,26 @@ class CitiesController < ApplicationController
 
   def show
     @city = City.find(params[:id])
-    @weather_prevision_d1 = weather_prevision_d1
-    @weather_prevision_d2 = weather_prevision_d2
-    @weather_prevision_d3 = weather_prevision_d3
+    @weather_prevision_d1 = weather_prevision(Date.today + 1)
+    @weather_prevision_d2 = weather_prevision(Date.today + 2)
+    @weather_prevision_d3 = weather_prevision(Date.today + 3)
   end
 
   def create
-    @city = City.new(city_params)
-    if @city.save
-      redirect_to city_path(@city)
+    department = find_department(city_params[:department])
+
+    city_attributes = { name: city_params[:name],
+                        longitude: city_params[:longitude],
+                        latitude: city_params[:latitude],
+                        country: city_params[:country],
+                        region: city_params[:region],
+                        department: department }
+
+    if City.exists?(city_attributes)
+      redirect_to city_path(City.find_by(city_attributes))
     else
-      redirect_to cities_path
+      @city = City.new(city_attributes)
+      redirect_to @city.save! ? city_path(@city) : cities_path
     end
   end
 
@@ -25,46 +34,44 @@ class CitiesController < ApplicationController
     params.permit(:name, :longitude, :latitude, :country, :region, :department)
   end
 
-  def weather_prevision_d1
-    if WeatherPrevision.exists?(city: @city, date: Date.today + 1)
-      WeatherPrevision.find_by(city: @city, date: Date.today + 1)
+  def find_department(params_department)
+    if %w[2A 2B].include?(params_department)
+      Department.find_by(number: 20)
     else
-      random_weather_prevision(Date.today + 1)
+      Department.find_by(number: params_department.to_i)
     end
   end
 
-  def weather_prevision_d2
-    if WeatherPrevision.exists?(city: @city, date: Date.today + 2)
-      WeatherPrevision.find_by(city: @city, date: Date.today + 2)
+  def weather_prevision(date)
+    if WeatherPrevision.exists?(city: @city, date: date)
+      WeatherPrevision.find_by(city: @city, date: date)
     else
-      random_weather_prevision(Date.today + 2)
-    end
-  end
-
-  def weather_prevision_d3
-    if WeatherPrevision.exists?(city: @city, date: Date.today + 3)
-      WeatherPrevision.find_by(city: @city, date: Date.today + 3)
-    else
-      random_weather_prevision(Date.today + 3)
+      random_weather_prevision(date)
     end
   end
 
   def random_weather_prevision(day)
-    # city = City.find(params[:id])
-    # weathers_array = []
-    # WeatherType.all.each { |weather| weather.weight.times { weathers_array << weather } }
-    # weather_type = weathers_array.sample
-    # # weather_type = WeatherType.order('RANDOM()').first
-    # # raise
-    # temperature = if WeatherPrevision.exists?(city_id: city.id, date: day - 1)
-    #                 WeatherPrevision.find_by(city: city, date: day - 1).temperature
-    #               else
-    #                 (12..25).to_a.sample
-    #               end
-    # temperature += weather_type.temp
-    # # temperature_feels_like = (10..25).to_a.sample
-    # # wind_speed = (0..60).to_a.sample
+    city = City.find(params[:id])
+    record = TemperatureRecord.find_by(department: city.department, month: Date.today.month)
+    temperature = if WeatherPrevision.exists?(city_id: city.id, date: day - 1)
+                    last_temp = WeatherPrevision.find_by(city: city, date: day - 1).temperature
+                    last_temp += (last_temp - record.temp_min) if last_temp - 2 <= record.temp_min
+                    last_temp -= (record.temp_max - last_temp) if last_temp + 2 >= record.temp_max
+                    temp = ((last_temp - 3)..(last_temp + 3)).to_a.sample
+                    temp = record.temp_min if temp < record.temp_min
+                    temp = record.temp_max if temp > record.temp_max
+                    temp
+                  else
+                    ((record.temp_min)..(record.temp_max)).to_a.sample
+                  end
 
-    # WeatherPrevision.create!(date: day, city: city, weather_type: weather_type, temperature: temperature)
+    weathers_temp_min = WeatherType.where('temperature_min <= ?', temperature).or(WeatherType.where(temperature_min: nil))
+    weathers_temp_max = WeatherType.where('temperature_max >= ?', temperature).or(WeatherType.where(temperature_max: nil))
+    possible_weathers = weathers_temp_min & weathers_temp_max
+    weathers_array = []
+    possible_weathers.each { |weather| weather.weight.times { weathers_array << weather.id } }
+    weather_type = WeatherType.find(weathers_array.sample)
+
+    WeatherPrevision.create!(date: day, city: city, weather_type: weather_type, temperature: temperature)
   end
 end
