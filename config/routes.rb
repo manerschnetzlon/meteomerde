@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :cities, only: %i[create index show] do
     resources :weather_previsions, only: %i[new create edit update destroy]
   end
-  resources :wind_directions, only: [:create]
   resources :weather_types, only: [:create]
+
+  resources :temperature_records
 end
