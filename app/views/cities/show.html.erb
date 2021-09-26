@@ -1,23 +1,14 @@
 <h1><%= @city.name %></h1>
 
-<div>
-  <div class="day0">
-    <p><%= @weather_prevision_d1.date %></p>
-    <p><%= @weather_prevision_d1.weather_type.name %></p>
-    <p>Température : <%= @weather_prevision_d1.temperature %> °C</p>
+<hr>
+<% @previsions.each do |prevision| %>
+  <div>
+    <p><%= prevision.date %></p>
+    <p><%= prevision.weather_type.name %></p>
+    <p>Température : <%= prevision.temperature %> °C</p>
   </div>
   <hr>
-  <div class="day1">
-    <p><%= @weather_prevision_d2.date%></p>
-    <p><%= @weather_prevision_d2.weather_type.name %></p>
-    <p>Température : <%= @weather_prevision_d2.temperature %> °C</p>
-  </div>
-  <hr>
-  <div class="day3">
-    <p><%= @weather_prevision_d3.date %></p>
-    <p><%= @weather_prevision_d3.weather_type.name %></p>
-    <p>Température : <%= @weather_prevision_d3.temperature %> °C</p>
-  </div>
-</div>
+<% end %>
 
+<%= link_to 'Choisis la meteo', new_city_weather_prevision_path(@city) %>
 <%= link_to 'Back', cities_path, class: 'm-3' %>

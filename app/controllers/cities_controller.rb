@@ -5,9 +5,10 @@ class CitiesController < ApplicationController
 
   def show
     @city = City.find(params[:id])
-    @weather_prevision_d1 = weather_prevision(Date.today + 1)
-    @weather_prevision_d2 = weather_prevision(Date.today + 2)
-    @weather_prevision_d3 = weather_prevision(Date.today + 3)
+    weather_prevision(Date.today + 1)
+    weather_prevision(Date.today + 2)
+    weather_prevision(Date.today + 3)
+    @previsions = WeatherPrevision.where(city: @city).where('date > ?', Date.today).order(date: :asc)
   end
 
   def create
@@ -19,7 +20,7 @@ class CitiesController < ApplicationController
       redirect_to city_path(City.find_by(city_attributes))
     else
       @city = City.new(city_attributes)
-      redirect_to @city.save! ? city_path(@city) : cities_path
+      redirect_to @city.save ? city_path(@city) : cities_path
     end
   end
 

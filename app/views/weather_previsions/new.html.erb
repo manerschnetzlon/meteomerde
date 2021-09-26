@@ -1,2 +1,10 @@
-<h1>WeatherPrevisions#new</h1>
-<p>Find me in app/views/weather_previsions/new.html.erb</p>
+<h1>Choisis la meteo de <%= @city.name %></h1>
+
+<%= simple_form_for [@city, @weather_prevision] do |f| %>
+  <%= f.input :date, start_year: Date.today.year %>
+  <%= f.input :temperature, collection: -36..46, selected: @city.department.temperature_records.find_by(month: Date.today.month).temp_average %>
+  <%= f.input :weather_type, collection: @weather_types, label_method: :name, value_method: :id %>
+  <%= f.button :submit %>
+<% end %>
+
+<%= link_to "Back", city_path(@city), class: "m-3" %>
