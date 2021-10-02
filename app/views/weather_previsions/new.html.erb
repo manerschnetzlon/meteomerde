@@ -1,7 +1,7 @@
 <h1>Choisis la meteo de <%= @city.name %></h1>
 
 <%= simple_form_for [@city, @weather_prevision] do |f| %>
-  <%= f.input :date, start_year: Date.today.year %>
+  <%= f.input :date, start_year: Date.today.year, selected: Date.today + 1 %>
   <%= f.input :temperature, collection: -36..46, selected: @city.department.temperature_records.find_by(month: Date.today.month).temp_average %>
   <%= f.input :weather_type, collection: @weather_types, label_method: :name, value_method: :id %>
   <%= f.button :submit %>

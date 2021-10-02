@@ -8,7 +8,8 @@ class CitiesController < ApplicationController
     weather_prevision(Date.today + 1)
     weather_prevision(Date.today + 2)
     weather_prevision(Date.today + 3)
-    @previsions = WeatherPrevision.where(city: @city).where('date > ?', Date.today).order(date: :asc)
+    # @previsions = WeatherPrevision.where(city: @city).where('date > ?', Date.today).order(date: :asc)
+    @previsions = WeatherPrevision.where(city: @city).where('date > ?', Date.today).select('DISTINCT ON ("date") *').order(:date, created_at: :desc)
   end
 
   def create
