@@ -6,6 +6,7 @@
     <p><%= prevision.date %></p>
     <p><%= prevision.weather_type.name %></p>
     <p>Température : <%= prevision.temperature %> °C</p>
+    <%= render inline: Rails.root.join("app/assets/images/pictogrammes/#{prevision.weather_type.name.parameterize(separator: '_')}.svg").read %>
   </div>
   <hr>
 <% end %>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.2.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#FFFFFF;stroke-width:6;stroke-linecap:round;stroke-miterlimit:10;}
+	.st1{fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-miterlimit:10;}
+</style>
+<g>
+	<path class="st0" d="M19.09,51.66C18.38,49.79,18,47.7,18,45.5C18,37.49,24.49,31,32.5,31l3.04,0.16C38.01,19.08,48.69,10,61.5,10
+		C76.14,10,86.73,21.92,88,36.5c0.5,5.75-1.25,11.62-5,16.06c-2.22,2.63-5.15,4.76-8.72,6.05"/>
+	<path class="st0" d="M11,60h46h-0.5C65.06,60,72,53.06,72,44.5S65.06,29,56.5,29S41,35.94,41,44.5c0,1.76,0.29,3.45,0.83,5.02"/>
+	<path class="st0" d="M11,70h15c4.97,0,9,4.03,9,9s-4.03,9-9,9s-9-4.03-9-9"/>
+	<g>
+		<line class="st1" x1="51.25" y1="85" x2="61.25" y2="85"/>
+		<line class="st1" x1="53.25" y1="88" x2="59.25" y2="82"/>
+		<line class="st1" x1="56.25" y1="90" x2="56.25" y2="80"/>
+		<line class="st1" x1="59.25" y1="88" x2="53.25" y2="82"/>
+	</g>
+	<g>
+		<line class="st1" x1="69.75" y1="85" x2="79.75" y2="85"/>
+		<line class="st1" x1="71.75" y1="88" x2="77.75" y2="82"/>
+		<line class="st1" x1="74.75" y1="90" x2="74.75" y2="80"/>
+		<line class="st1" x1="77.75" y1="88" x2="71.75" y2="82"/>
+	</g>
+	<g>
+		<line class="st1" x1="42" y1="74" x2="52" y2="74"/>
+		<line class="st1" x1="44" y1="77" x2="50" y2="71"/>
+		<line class="st1" x1="47" y1="79" x2="47" y2="69"/>
+		<line class="st1" x1="50" y1="77" x2="44" y2="71"/>
+	</g>
+	<g>
+		<line class="st1" x1="60.5" y1="74" x2="70.5" y2="74"/>
+		<line class="st1" x1="62.5" y1="77" x2="68.5" y2="71"/>
+		<line class="st1" x1="65.5" y1="79" x2="65.5" y2="69"/>
+		<line class="st1" x1="68.5" y1="77" x2="62.5" y2="71"/>
+	</g>
+	<g>
+		<line class="st1" x1="79" y1="74" x2="89" y2="74"/>
+		<line class="st1" x1="81" y1="77" x2="87" y2="71"/>
+		<line class="st1" x1="84" y1="79" x2="84" y2="69"/>
+		<line class="st1" x1="87" y1="77" x2="81" y2="71"/>
+	</g>
+</g>
+</svg>
