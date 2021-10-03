@@ -31,7 +31,13 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'autoprefixer-rails', '10.2.5'
 gem 'font-awesome-sass', '~> 5.6.1'
 gem 'simple_form'
+
 gem "simple_calendar", "~> 2.4"
+gem "rails-i18n"
+
+gem "excon"
+
+gem "dotenv-rails"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

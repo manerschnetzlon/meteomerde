@@ -1,6 +1,7 @@
 class CitiesController < ApplicationController
   def index
     @cities = City.all
+    # raise
   end
 
   def show
@@ -10,6 +11,7 @@ class CitiesController < ApplicationController
     weather_prevision(Date.today + 3)
     # @previsions = WeatherPrevision.where(city: @city).where('date > ?', Date.today).order(date: :asc)
     @previsions = WeatherPrevision.where(city: @city).where('date > ?', Date.today).select('DISTINCT ON ("date") *').order(:date, created_at: :desc)
+    # @today_real_weather = today_real_weather(@city)
   end
 
   def create
@@ -46,6 +48,24 @@ class CitiesController < ApplicationController
     else
       Department.find_by(number: params_department.to_i)
     end
+  end
+
+  def request_api(url)
+    response = Excon.get(
+      url,
+      headers: {
+        'X-RapidAPI-Host' => URI.parse(url).host
+      }
+    )
+    return nil if response.status != 200
+    JSON.parse(response.body)
+  end
+
+  def today_real_weather(city)
+    api_key = ENV['OPEN_WEATHER_MAP_API_KEY']
+    request_api(
+      "http://api.openweathermap.org/data/2.5/weather?lat=#{city.latitude}&lon=#{city.longitude}&units=metric&appid=#{api_key}"
+    )
   end
 
   def weather_prevision(date)

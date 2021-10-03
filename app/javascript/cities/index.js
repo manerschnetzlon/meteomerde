@@ -15,7 +15,7 @@ const searchCity = () => {
           cities.forEach(city => {
             const liElement = document.createElement("li");
             const aElement = document.createElement("a");
-            aElement.setAttribute('href', `/cities?name=${city.properties.label}&longitude=${city.geometry.coordinates[0]}&latitude=${city.geometry.coordinates[0]}&department=${city.properties.context.split(", ")[0]}&region=${city.properties.context.split(", ")[2]}&country=France`);
+            aElement.setAttribute('href', `/cities?name=${city.properties.label}&longitude=${city.geometry.coordinates[0]}&latitude=${city.geometry.coordinates[1]}&department=${city.properties.context.split(", ")[0]}&region=${city.properties.context.split(", ")[2]}&country=France`);
             aElement.setAttribute('data-method', 'post');
             aElement.innerHTML = `${city.properties.label}, ${city.properties.context.split(", ")[1]}`;
             ulElement.appendChild(liElement);

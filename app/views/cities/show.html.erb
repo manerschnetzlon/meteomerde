@@ -16,6 +16,7 @@
 <hr>
 
 <%= month_calendar(events: @previsions) do |date, previsions| %>
+
   <%= date.day %>
   <% previsions.each do |prevision| %>
     <div>
