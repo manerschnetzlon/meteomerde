@@ -1,5 +1,6 @@
 <h1><%= @city.name %></h1>
 
+<%= link_to "Back", cities_path, class: "m-3" %>
 <hr>
 <% @previsions.each do |prevision| %>
   <div>
@@ -12,4 +13,13 @@
 <% end %>
 
 <%= link_to 'Choisis la meteo', new_city_weather_prevision_path(@city) %>
-<%= link_to 'Back', cities_path, class: 'm-3' %>
+<hr>
+
+<%= month_calendar(events: @previsions) do |date, previsions| %>
+  <%= date.day %>
+  <% previsions.each do |prevision| %>
+    <div>
+      <p><%= prevision.weather_type.name %> - <%= prevision.temperature %> °C </p>
+    </div>
+  <% end %>
+<% end %>

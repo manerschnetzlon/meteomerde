@@ -6,8 +6,10 @@ class WeatherPrevision < ApplicationRecord
   validate :date_must_be_future
 
   def date_must_be_future
-    if date < Date.today + 1
-      errors.add(:date, "can't be in the past")
-    end
+    errors.add(:date, "can't be in the past") if date < Date.today + 1
+  end
+
+  def start_time
+    date
   end
 end
