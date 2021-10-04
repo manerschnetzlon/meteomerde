@@ -1,7 +1,6 @@
 class CitiesController < ApplicationController
   def index
-    @cities = City.all
-    # raise
+    # @cities = City.all
   end
 
   def show
