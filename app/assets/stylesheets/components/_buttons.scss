@@ -1,0 +1,22 @@
+.btn-confirmer {
+  color: #f8f9fa;
+  border-color: #f8f9fa;
+  border-width: 2px;
+  font-weight: 600;
+
+  &:hover {
+    color: #0b598f;
+    border-color: #0b598f;
+    transition: all 0.5s ease-out;
+    font-weight: 600;
+  }
+}
+
+.btn-back {
+  color: #0b598f;
+
+  &:hover {
+    color: #3a86bd;
+    transition: all 0.2s ease-out;
+  }
+}
