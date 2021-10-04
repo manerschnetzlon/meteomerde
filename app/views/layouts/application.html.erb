@@ -12,6 +12,12 @@
   </head>
 
   <body>
+    <div class="home fixed-top">
+      <%= link_to root_path do %>
+        <%= render inline: Rails.root.join("app/assets/images/pictogrammes/eclaircies.svg").read %>
+      <% end %>
+
+    </div>
     <div class="container d-flex flex-column align-items-center justify-content-center vh-100">
       <%= yield %>
       <% flash.each do |type, msg| %>

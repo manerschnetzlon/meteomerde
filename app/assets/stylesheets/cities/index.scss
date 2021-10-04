@@ -11,14 +11,10 @@
   }
 }
 
-svg {
-  height: 100px;
-}
-
 #results {
-  background-color: #ffffff52;
-  border-radius: 0 0 10px 10px;
-  padding-top: 20px;
+  background-color: #ffffff24;
+  border-radius: 0 0 5px 5px;
+  padding-top: 15px;
   padding-bottom: 20px;
 
   &:empty {
@@ -32,7 +28,7 @@ svg {
 
   a {
     color: white;
-    font-weight: 600;
+    font-weight: normal;
 
     &:hover {
       color: #db919a;

@@ -12,14 +12,22 @@
 // Your CSS partials
 @import "components/index";
 @import "cities/index";
+@import "cities/show";
 @import "pages/index";
 @import "weather_previsions/new";
 
 body {
+  background-color: #EAAAAE;
   background-image: url(background);
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
   position: relative;
+}
+
+.home {
+  svg {
+    height: 60px;
+  }
 }
