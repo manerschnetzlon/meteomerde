@@ -8,9 +8,10 @@
 City.destroy_all
 WeatherPrevision.destroy_all
 WeatherType.destroy_all
-WeatherType.destroy_all
 Department.destroy_all
 TemperatureRecord.destroy_all
+
+puts 'Start creating Weather Types'
 
 WeatherType.create!(name: 'Très ensoleillé', weight: 10)
 WeatherType.create!(name: 'Ensoleillé', weight: 15)
@@ -42,41 +43,49 @@ WeatherType.create!(name: 'Cyclone', weight: 1, temperature_min: 29)
 WeatherType.create!(name: 'Ouragan', weight: 1, temperature_min: 29)
 WeatherType.create!(name: 'Tempête de sable', weight: 1, temperature_min: 30)
 
+puts 'Weather Types created !'
+
 require 'csv'
 csv_options = { headers: :first_row, header_converters: :symbol }
-
-month = '01'
-month_record = {
-  temp_min: [],
-  temp_max: [],
-  temp_average: []
-}
+data_hash = {}
+pattern = /2019-(?<month>\d{2})-/
 
 puts 'Start reading the CSV file'
 
+puts 'Building hash'
 CSV.foreach('db/temperature_records.csv', csv_options) do |row|
-  month_record[:num] = row[:num].to_i
-  month_record[:name] = row[:name]
+  month = row[:date].match(pattern)[:month]
 
-  if row[:date].match?(/^2019-#{month}/)
-    month_record[:month] = month.to_i
-    month_record[:temp_min] << row[:min].to_f.round
-    month_record[:temp_max] << row[:max].to_f.round
-    month_record[:temp_average] << row[:average].to_f.round
+  if data_hash[row[:num]].nil?
+    data_hash[row[:num]] = { name: row[:name], months: {} }
+  end
+  if data_hash[row[:num]][:months][month].nil?
+    data_hash[row[:num]][:months][month] = { temp_min: [],
+                                             temp_max: [],
+                                             temp_average: [] }
+  end
+  data_hash[row[:num]][:months][month][:temp_min] << row[:min].to_i.round
+  data_hash[row[:num]][:months][month][:temp_max] << row[:max].to_i.round
+  data_hash[row[:num]][:months][month][:temp_average] << row[:average].to_i.round
+end
+puts 'Hash built'
+
+data_hash.each do |key, value|
+  if Department.exists?(number: key.to_i)
+    department = Department.find_by(number: key.to_i)
   else
-    unless Department.exists?(number: month_record[:num])
-      Department.create!(name: month_record[:name], number: month_record[:num])
-      puts "#{month_record[:name]} departement created !"
-    end
-    temp_min = month_record[:temp_min].sum / month_record[:temp_min].length
-    temp_max = month_record[:temp_max].sum / month_record[:temp_max].length
-    temp_average = month_record[:temp_average].sum / month_record[:temp_average].length
-    department = Department.find_by(number: month_record[:num])
-    unless TemperatureRecord.exists?(month: month_record[:month], department: department)
-      TemperatureRecord.create!(month: month_record[:month], temp_min: temp_min, temp_max: temp_max, temp_average: temp_average, department: department)
-      puts "Temperature record for #{department.name} and month #{month_record[:month]} created !"
-    end
-    month = month <= '12' ? month.next : '01'
+    department = Department.create!(name: value[:name], number: key.to_i)
+    puts "#{value[:name]} departement created !"
+  end
+
+  value[:months].each do |key2, value2|
+    next if TemperatureRecord.exists?(month: key2.to_i, department: department)
+
+    temp_min = value2[:temp_min].sum / value2[:temp_min].length
+    temp_max = value2[:temp_max].sum / value2[:temp_max].length
+    temp_average = value2[:temp_average].sum / value2[:temp_average].length
+    TemperatureRecord.create!(month: key2.to_i, temp_min: temp_min, temp_max: temp_max, temp_average: temp_average, department: department)
+    puts "Temperature record for #{Department.find_by(number: key.to_i).name} and month #{key2.to_i} created !"
   end
 end
 
