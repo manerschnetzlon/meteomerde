@@ -1,7 +1,7 @@
 class WeatherPrevisionsController < ApplicationController
   def new
     @city = City.find(params[:city_id])
-    @weather_prevision = WeatherPrevision.new
+    @weather_prevision = WeatherPrevision.new(date: params[:date])
     @weather_types = WeatherType.all
   end
 
@@ -15,7 +15,17 @@ class WeatherPrevisionsController < ApplicationController
     if @weather_prevision.save
       redirect_to city_path(@city)
     else
-      render :new
+      notice = case @weather_prevision.errors.attribute_names
+               when [:weather_type]
+                 'selectionnez un weather type'
+               when [:date]
+                 'une prevision existe déjà ce jour là'
+               when [:temperature]
+                 'selectionnez une temperature'
+               else
+                 'un problème est survenu'
+               end
+      redirect_to new_city_weather_prevision_path(@city, params: { date: @weather_prevision[:date] }), notice: notice
     end
   end
 

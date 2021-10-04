@@ -1,19 +1,6 @@
 <h1><%= @city.name %></h1>
 
 <%= link_to "Back", cities_path, class: "m-3" %>
-<hr>
-<% @previsions.each do |prevision| %>
-  <div>
-    <p><%= prevision.date %></p>
-    <p><%= prevision.weather_type.name %></p>
-    <p>Température : <%= prevision.temperature %> °C</p>
-    <%= render inline: Rails.root.join("app/assets/images/pictogrammes/#{prevision.weather_type.name.parameterize(separator: '_')}.svg").read %>
-  </div>
-  <hr>
-<% end %>
-
-<%#= link_to 'Choisis la meteo', new_city_weather_prevision_path(@city) %>
-<hr>
 
 <%= month_calendar(events: @previsions) do |date, previsions| %>
   <%= date.day %>
@@ -28,3 +15,19 @@
   <% end %>
 
 <% end %>
+
+<hr>
+<% @previsions.each do |prevision| %>
+  <div>
+    <p><%= prevision.date %></p>
+    <p><%= prevision.weather_type.name %></p>
+    <p>Température : <%= prevision.temperature %> °C</p>
+    <%= render inline: Rails.root.join("app/assets/images/pictogrammes/#{prevision.weather_type.name.parameterize(separator: '_')}.svg").read %>
+  </div>
+  <hr>
+<% end %>
+
+<%#= link_to 'Choisis la meteo', new_city_weather_prevision_path(@city) %>
+<%# <hr> %>
+
+
