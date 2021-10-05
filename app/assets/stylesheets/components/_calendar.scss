@@ -51,6 +51,11 @@
     text-align: center;
     color: #fff;
     font-weight: lighter;
+
+    .active {
+      box-shadow: inset 0px 0px 0px 4px rgba(255, 255, 255, 0.795);
+      background-color: #b69ebec7;
+    }
   }
 
   td {
@@ -81,6 +86,7 @@
     &:hover {
       background-color: #b69ebec7;
       transition: all 0.2s ease-out;
+      cursor: pointer;
     }
   }
 }

@@ -15,7 +15,7 @@
           <% end %>
 
           <% previsions.each do |prevision| %>
-            <div class="d-flex justify-content-center my-1">
+            <div id="<%= prevision.id %>" class="d-flex justify-content-center my-1">
               <%= render inline: Rails.root.join("app/assets/images/pictogrammes/#{prevision.weather_type.name.parameterize(separator: "_")}.svg").read %>
             </div>
           <% end %>
@@ -23,8 +23,8 @@
         <% end %>
       </div>
 
-      <div class="col-5 card_weather d-flex mx-0">
-
+      <div class="col-5 card_weather d-flex flex-column align-items-center justify-content-between mx-0 text-light">
+        <%= render 'cities/partials/infos_weather_prevision', prevision: @previsions.first, remote: true %>
       </div>
     </div>
 </div>

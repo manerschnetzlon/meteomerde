@@ -1,5 +1,15 @@
 .show_container {
   margin-top: 20%;
+
+  h2 {
+    font-size: xxx-large;
+  }
+
+  h4 {
+    font-weight: 200;
+    padding-bottom: 2px;
+    border-bottom: 8px solid;
+  }
 }
 
 .card_weather {
@@ -7,6 +17,10 @@
   border: 2px solid #ffffffc2;
   border-radius: 5px;
   background-color: #ffffff24;
-  padding: 40px 40px 20px 40px;
+  padding: 20px;
+
+  svg {
+    height: 200px;
+  }
 }
 

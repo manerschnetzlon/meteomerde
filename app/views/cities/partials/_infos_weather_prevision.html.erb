@@ -1,0 +1,5 @@
+<h4><%= prevision.date.strftime('%m.%d.%Y') %></h4>
+<%= render inline: Rails.root.join("app/assets/images/pictogrammes/#{prevision.weather_type.name.parameterize(separator: "_")}.svg").read %>
+<h3><%= prevision.weather_type.name %></h3>
+<h2><%= prevision.temperature %> °C</h2>
+

@@ -9,7 +9,8 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import 'bootstrap';
 
-import { sayHello, searchCity } from '../cities/index';
+import { searchCity } from '../cities/index';
+import { selectWeatherPrevision } from '../cities/show';
 
 Rails.start()
 Turbolinks.start()
@@ -19,4 +20,5 @@ ActiveStorage.start()
 
 document.addEventListener('turbolinks:load', () => {
   searchCity();
+  selectWeatherPrevision();
 });
