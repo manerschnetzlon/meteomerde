@@ -10,7 +10,7 @@
 
   <% previsions.each do |prevision| %>
     <div id="<%= prevision.id %>" class="d-flex justify-content-center my-1">
-      <%= link_to city_weather_prevision_path(prevision.city, prevision) do %>
+      <%= link_to city_weather_prevision_path(prevision.city, prevision, params: { start_date: prevision.date }) do %>
         <%= render inline: Rails.root.join("app/assets/images/pictogrammes/#{prevision.weather_type.name.parameterize(separator: "_")}.svg").read %>
       <% end %>
     </div>

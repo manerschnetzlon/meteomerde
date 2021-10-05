@@ -26,13 +26,13 @@ class WeatherPrevisionsController < ApplicationController
     else
       notice = case @weather_prevision.errors.attribute_names
                when [:weather_type]
-                 'selectionnez un weather type'
+                 'Sélectionnez un phénomène météorologique'
                when [:date]
-                 'une prevision existe déjà ce jour là'
+                 'Une prevision existe déjà ce jour là'
                when [:temperature]
-                 'selectionnez une temperature'
+                 'Sélectionnez une temperature'
                else
-                 'un problème est survenu'
+                 'Un problème est survenu'
                end
       redirect_to new_city_weather_prevision_path(@city, params: { date: @weather_prevision[:date] }), notice: notice
     end

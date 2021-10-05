@@ -1,11 +1,11 @@
-<div class="col-12 second-container show_container d-flex flex-column">
-  <h1 class="text-white text-center pb-5"><strong><%= @city.name %></strong>, <%= @city.department.name %></h1>
-  <div class="d-flex flex-row justify-content-between">
-    <div class="col-5 calendar d-flex flex-column">
+<div class="col-12 second-container show_container d-flex flex-column justify-content-center">
+  <h1 class="text-white text-center pb-4"><strong><%= @city.name %></strong>, <%= @city.department.name %></h1>
+  <div class="d-flex flex-row flex-wrap justify-content-between">
+    <div class="col-sm-12 col-lg-6 col-xl-5 calendar d-flex flex-column">
       <%= render "shared/calendar", weather_previsions: @previsions, remote: true %>
     </div>
 
-    <div class="col-5 card_weather d-flex flex-column align-items-center justify-content-between mx-0 text-light">
+    <div class="col-sm-12 col-lg-6 col-xl-5 card_weather d-flex flex-column align-items-center justify-content-between mx-0 text-light">
       <%= render "cities/partials/infos_weather_prevision", prevision: @weather_prevision, remote: true %>
     </div>
   </div>

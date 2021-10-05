@@ -1,5 +1,5 @@
 .second-container {
-  margin: 20% auto auto;
+  // margin: 20% auto auto;
 
   input::placeholder {
     font-weight: lighter;
@@ -11,6 +11,10 @@
   }
 }
 
+.div-results {
+  height: 200px;
+}
+
 #results {
   background-color: #ffffff24;
   border-radius: 0 0 5px 5px;
@@ -18,7 +22,7 @@
   padding-bottom: 20px;
 
   &:empty {
-    padding: 0;
+    background: none;
   }
 
   li {
