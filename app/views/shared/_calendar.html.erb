@@ -1,0 +1,20 @@
+<%= month_calendar(events: weather_previsions) do |date, previsions| %>
+  <%= date.day %>
+  <% if date > Date.today && !weather_previsions.exists?(date: date) %>
+    <div class="d-flex justify-content-center my-1">
+      <%= link_to new_city_weather_prevision_path(@city, params: { date: date }) do %>
+        <i class="fas fa-plus text-light h5"></i>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% previsions.each do |prevision| %>
+    <div id="<%= prevision.id %>" class="d-flex justify-content-center my-1">
+      <%= link_to city_weather_prevision_path(prevision.city, prevision) do %>
+        <%= render inline: Rails.root.join("app/assets/images/pictogrammes/#{prevision.weather_type.name.parameterize(separator: "_")}.svg").read %>
+      <% end %>
+    </div>
+
+  <% end %>
+
+<% end %>

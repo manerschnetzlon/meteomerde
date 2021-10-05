@@ -4,5 +4,9 @@
     <div class="col-5 calendar d-flex flex-column">
       <%= render "shared/calendar", weather_previsions: @previsions, remote: true %>
     </div>
+
+    <div class="col-5 card_weather d-flex flex-column align-items-center justify-content-between mx-0 text-light">
+      <%= render "cities/partials/infos_weather_prevision", prevision: @weather_prevision, remote: true %>
+    </div>
   </div>
 </div>

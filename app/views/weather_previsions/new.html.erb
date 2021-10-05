@@ -1,6 +1,6 @@
 <div class="second-container form-container">
   <h3 class="text-white">Choisis la meteo : </h3>
-  <h1 class="text-white"><strong><%= @city.name %></strong> le <%= params[:date].to_date %></h1>
+  <h1 class="text-white"><strong><%= @city.name %></strong> le <%= params[:date].to_date.strftime('%d.%m.%Y') %></h1>
 
   <%= simple_form_for [@city, @weather_prevision] do |f| %>
     <%= f.input :date, as: :hidden, input_html: { value: @weather_prevision[:date] } %>
@@ -8,7 +8,7 @@
     <%= f.input :weather_type, label: 'Choisis le phénomène', collection: @weather_types, label_method: :name, value_method: :id %>
     <div class= "d-flex mt-5 justify-content-center align-items-start">
       <%= f.button :submit, 'Confirmer', class: "btn btn-confirmer" %>
-      <%= link_to "Retour", city_path(@city), class: "m-3 btn-back" %>
+      <%= link_to "Retour", city_path(@city, params: { start_date: params[:date] }), class: "m-3 btn-back" %>
     </div>
   <% end %>
 

@@ -1,4 +1,13 @@
 class WeatherPrevisionsController < ApplicationController
+
+  def show
+    @weather_prevision = WeatherPrevision.find(params[:id])
+    @city = City.find(params[:city_id])
+    # raise
+    # @city = @weather_prevision.city
+    @previsions = WeatherPrevision.where(city: @city).where("date > ?", Date.today).select('DISTINCT ON ("date") *').order(:date, created_at: :desc)
+  end
+
   def new
     @city = City.find(params[:city_id])
     @weather_prevision = WeatherPrevision.new(date: params[:date])
@@ -13,7 +22,7 @@ class WeatherPrevisionsController < ApplicationController
       @weather_prevision.weather_type = WeatherType.find(params[:weather_prevision][:weather_type])
     end
     if @weather_prevision.save
-      redirect_to city_path(@city)
+      redirect_to city_weather_prevision_path(@city, @weather_prevision, params: { start_date: @weather_prevision.date })
     else
       notice = case @weather_prevision.errors.attribute_names
                when [:weather_type]
