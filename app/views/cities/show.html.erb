@@ -1,31 +1,30 @@
-<div class="col-12 second-container show_container d-flex flex-row justify-content-between">
+<div class="col-12 second-container show_container d-flex flex-column">
 
+    <h1 class="text-white text-center pb-5"><strong><%= @city.name %></strong>, <%= @city.department.name %></h1>
+    <div class="d-flex flex-row justify-content-between">
+      <div class="col-5 calendar d-flex flex-column">
 
-  <div class="col-5 calendar d-flex my-auto mx-0 flex-column">
-    <h1 class="text-white mb-3"><strong><%= @city.name %></strong>, <%= @city.department.name %></h1>
-
-    <%= month_calendar(events: @previsions) do |date, previsions| %>
-      <%= date.day %>
-      <% if date > Date.today && !@previsions.exists?(date: date) %>
-        <div class="d-flex justify-content-center my-1">
-          <%= link_to new_city_weather_prevision_path(@city, params: { date: date }) do %>
-            <i class="fas fa-plus text-light h5"></i>
+        <%= month_calendar(events: @previsions) do |date, previsions| %>
+          <%= date.day %>
+          <% if date > Date.today && !@previsions.exists?(date: date) %>
+            <div class="d-flex justify-content-center my-1">
+              <%= link_to new_city_weather_prevision_path(@city, params: { date: date }) do %>
+                <i class="fas fa-plus text-light h5"></i>
+              <% end %>
+            </div>
           <% end %>
 
-        </div>
-      <% end %>
+          <% previsions.each do |prevision| %>
+            <div class="d-flex justify-content-center my-1">
+              <%= render inline: Rails.root.join("app/assets/images/pictogrammes/#{prevision.weather_type.name.parameterize(separator: "_")}.svg").read %>
+            </div>
+          <% end %>
 
-      <% previsions.each do |prevision| %>
-        <div class="d-flex justify-content-center my-1">
-          <%= render inline: Rails.root.join("app/assets/images/pictogrammes/#{prevision.weather_type.name.parameterize(separator: "_")}.svg").read %>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
 
-    <% end %>
-  </div>
+      <div class="col-5 card_weather d-flex mx-0">
 
-
-  <div class="col-5 card_weather d-flex my-auto mx-0 m-0 border">
-
-  </div>
+      </div>
+    </div>
 </div>
