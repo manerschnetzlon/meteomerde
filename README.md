@@ -5,7 +5,7 @@
 
 - [x] des prévisions bidons mais réalistes
 - [x] la possibilité d'overrider les prévisions automatiques en choisissant vous-même une température et un phénomène météorologique pour un jour et une ville
-- [x] un joli site bien propre
+- [x] un joli site bien propre avec des pictogrammes maison
 - [ ] bientôt responsive !  
 
 </br>
