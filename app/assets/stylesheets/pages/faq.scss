@@ -14,9 +14,14 @@
 
 .faq-questions {
   height: 80%;
+  padding-right: 30px;
   position: sticky;
   overflow: auto;
-  padding-right: 30px;
+  scrollbar-width: none;
+}
+
+.faq-questions::-webkit-scrollbar {
+  display: none;
 }
 
 .faq-comparatif {
