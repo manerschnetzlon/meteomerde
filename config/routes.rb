@@ -5,4 +5,5 @@ Rails.application.routes.draw do
     resources :weather_previsions, only: %i[show new create]
   end
   resources :weather_types, only: [:create]
+  get 'faq', to: 'pages#faq'
 end

@@ -13,7 +13,7 @@
 @import "components/index";
 @import "cities/index";
 @import "cities/show";
-@import "pages/index";
+@import "pages/faq";
 @import "weather_previsions/new";
 
 body {
@@ -30,5 +30,18 @@ body {
 .home {
   svg {
     height: 60px;
+  }
+}
+
+.faq {
+  font-size: xx-large;
+  font-weight: 600;
+  color: white;
+  padding: 5px 20px;
+
+  &:hover {
+    color: white;
+    text-decoration: none;
+    opacity: 0.8;
   }
 }

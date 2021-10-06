@@ -1,67 +1,119 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>The page you were looking for doesn't exist (404)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
+  <head>
+    <title>Onon c'est une 404</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet">
+    <style>
+      @-moz-keyframes spin {
+        100% {
+          -moz-transform: rotate(-360deg);
+        }
+      }
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
+      @-webkit-keyframes spin {
+        100% {
+          -webkit-transform: rotate(-360deg);
+        }
+      }
 
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+      @keyframes spin {
+        100% {
+          -webkit-transform: rotate(-360deg);
+          transform: rotate(-360deg);
+        }
+      }
 
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
+      body {
+        font-family: "Monserrat", sans-serif;
+        background-image: url(images/background.jpg);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        position: relative;
+      }
 
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-  </style>
-</head>
+      .container {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
-<body class="rails-default-error-page">
-  <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <div>
-      <h1>The page you were looking for doesn't exist.</h1>
-      <p>You may have mistyped the address or the page may have moved.</p>
+      .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+        min-height: 300px;
+        height: 40vh;
+        border: 2px solid #ffffffc2;
+        border-radius: 5px;
+        background-color: #ffffff24;
+        padding: 40px 40px 20px 40px;
+        margin: 0 auto 150px auto;
+      }
+
+      .btn-retour {
+        border: 2px solid #fff;
+        padding: 6px 20px;
+        border-radius: 50px;
+        font-weight: larger;
+        margin: 10% auto;
+        text-align: center;
+        color: #fff;
+        text-decoration: none;
+      }
+
+      .btn-retour:hover {
+        opacity: 0.7;
+      }
+
+      .portrait-avatar {
+        height: 130px;
+        border: 3px dashed #ffffffc2;
+        box-sizing: border-box;
+        border-radius: 100px;
+        -webkit-animation: spin 3.5s linear infinite;
+        -moz-animation: spin 3.5s linear infinite;
+        animation: spin 4.5s linear infinite;
+      }
+
+      h1 {
+        margin-bottom: 10px;
+        color: #fff;
+      }
+
+      h3 {
+        margin: 0 auto 32px;
+        font-weight: 200;
+        color: #fff;
+      }
+
+      img {
+        height: 60px;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="fixed-top">
+      <a href="http://meteomerde.com"></a><img src="images/eclaircies.svg" class="logo" alt="logo"></a>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
-  </div>
-</body>
+    <div class="container">
+      <div class="card">
+        <h1>Oh non.</h1>
+        <h3>Cette page n'existe pas...</h3>
+        <div>
+          <a href="http://meteomerde.com"><img src="images/maner.jpg" class="portrait-avatar" alt="portrait-avatar"></a>
+        </div>
+        <a href="http://meteomerde.com" class="btn-retour">Retourne vite sur meteomerde</a>
+      </div>
+    </div>
+  </body>
 </html>

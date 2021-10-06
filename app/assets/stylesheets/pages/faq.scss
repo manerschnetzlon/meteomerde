@@ -1,0 +1,30 @@
+.faq-container {
+  color: white;
+  height: 100vh;
+
+  p {
+    padding-left: 30px;
+  }
+}
+
+.faq-title {
+  height: 15%;
+  position: sticky;
+}
+
+.faq-questions {
+  height: 80%;
+  position: sticky;
+  overflow: auto;
+  padding-right: 30px;
+}
+
+.faq-comparatif {
+  margin-top: 10px;
+  margin-left: 30px;
+  margin-bottom: 20px;
+  th, td {
+    padding: 5px 30px;
+    text-align: center;
+  }
+}

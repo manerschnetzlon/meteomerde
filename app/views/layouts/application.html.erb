@@ -28,19 +28,17 @@
   </head>
 
   <body>
-    <div class="home fixed-top">
+    <div class="home fixed-top d-flex justify-content-between">
       <%= link_to root_path do %>
         <%= render inline: Rails.root.join("app/assets/images/pictogrammes/eclaircies.svg").read %>
       <% end %>
-
+      <%= link_to "?", faq_path, class: "faq" %>
     </div>
-    <div class="container d-flex flex-column align-items-center justify-content-center vh-100">
-      <%= yield %>
-      <% flash.each do |type, msg| %>
-        <div class="alert alert-info">
-          <%= msg %>
-        </div>
-      <% end %>
-    </div>
+    <%= yield %>
+    <% flash.each do |type, msg| %>
+      <div class="alert alert-info">
+        <%= msg %>
+      </div>
+    <% end %>
   </body>
 </html>
