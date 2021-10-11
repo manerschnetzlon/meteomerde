@@ -16,6 +16,56 @@
 @import "pages/faq";
 @import "weather_previsions/new";
 
+h1 {
+  font-size: 1.8rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.3rem;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+@include media-breakpoint-up(md) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 1.8rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+  h4 {
+    font-size: 1.2rem;
+    border-bottom: 4px solid !important;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.75rem;
+  }
+
+  h4 {
+    font-size: 1.5rem;
+  }
+}
+
 body {
   // background-image: linear-gradient(to right top, #eaacb1, #e6a7bb, #dca3c8, #cba3d4, #b3a4df, #a2aae7, #8fafec, #7ab5ef, #73bef3, #6dc8f6, #6bd0f8, #6cd9f8);
   // background-color: #EAAAAE;
