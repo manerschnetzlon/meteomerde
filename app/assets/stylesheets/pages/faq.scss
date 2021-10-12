@@ -21,9 +21,16 @@
   scrollbar-width: none;
 }
 
-.faq-questions::-webkit-scrollbar {
+.faq-questions::-webkit-scrollbar,
+.faq-div-scroll::-webkit-scrollbar {
   display: none;
 }
+
+.faq-div-scroll {
+  overflow: scroll;
+  scrollbar-width: none;
+}
+
 
 .faq-comparatif {
   margin-top: 10px;
