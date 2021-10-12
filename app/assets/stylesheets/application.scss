@@ -95,3 +95,12 @@ body {
     opacity: 0.8;
   }
 }
+
+.footer {
+  color: white;
+  &:hover {
+    color: white;
+    opacity: 0.8;
+    text-decoration: none;
+  }
+}

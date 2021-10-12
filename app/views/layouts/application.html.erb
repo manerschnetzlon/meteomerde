@@ -35,6 +35,9 @@
       <%= link_to "?", faq_path, class: "faq" %>
     </div>
     <%= yield %>
+    <div class="card-footer p-2 text-center fixed-bottom">
+      <%= link_to "By Maner ♥", "http://manonschnetzler.com", :target => "_blank", class: "footer" %>
+    </div>
     <% flash.each do |type, msg| %>
       <div class="alert alert-info">
         <%= msg %>
